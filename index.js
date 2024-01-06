@@ -85,6 +85,8 @@ let standButton = document.querySelector('#stand-button');
 
 let playerHand = [];
 let playerScore = 0;
+let dealerHand = [];
+let dealerScore = 0;
 
 hitButton.addEventListener('click', function() {
     // Deal a new card to the player
@@ -128,4 +130,21 @@ standButton.addEventListener('click', function() {
         updateUI(dealerHand, dealerScore, '#dealer-cards', '#dealer-score');
         alert("Player wins")
     }   
+});
+
+newGameButton.addEventListener('click', function() {
+    // Shuffle the deck
+    shuffleDeck(deck);
+
+    // Deal two cards to the player and dealer
+    playerHand = [dealCard(deck), dealCard(deck)];
+    dealerHand = [dealCard(deck), dealCard(deck)];
+
+    // Calculate the player and dealer scores
+    playerScore = calculateScore(playerHand);
+    dealerScore = calculateScore(dealerHand);
+
+    // Update the UI
+    updateUI(playerHand, playerScore, '#player-cards', '#player-score');
+    updateUI(dealerHand, dealerScore, '#dealer-cards', '#dealer-score');
 });
